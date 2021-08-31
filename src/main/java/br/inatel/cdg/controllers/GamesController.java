@@ -1,8 +1,9 @@
 package br.inatel.cdg.controllers;
 
 import br.inatel.cdg.models.Game;
+import br.inatel.cdg.models.enums.Platform;
+import br.inatel.cdg.models.enums.Publisher;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,21 +14,17 @@ public class GamesController {
         this.gameList = gameList;
     }
 
-    public List<Game> filterGameListByPlatform(Game.Platform platform){
-        List<Game> filteredGameList = this.gameList
+    public List<Game> filterGameListByPlatform(Platform platform){
+        return this.gameList
                 .stream()
-                .filter(g -> g.getPlatform() == platform)
+                .filter(g -> g.getPlatform().equals(platform.name().replaceAll("_", "")))
                 .collect(Collectors.toList());
-
-        return filteredGameList;
     }
 
-    public List<Game> filterGameListByPublisher(Game.Publisher publisher){
-        List<Game> filteredGameList = this.gameList
+    public List<Game> filterGameListByPublisher(Publisher publisher){
+        return this.gameList
                 .stream()
-                .filter(g -> g.getPublisher() == publisher)
+                .filter(g -> g.getPublisher().replaceAll("\\s+", "").equals(publisher.name()))
                 .collect(Collectors.toList());
-
-        return filteredGameList;
     }
 }
