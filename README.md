@@ -1,3 +1,5 @@
+[![CI](https://github.com/rairongf/maven_csv/actions/workflows/main.yml/badge.svg)](https://github.com/rairongf/maven_csv/actions/workflows/main.yml)
+
 # maven_csv
 
 ### Projetinho básico com o intuito de:
