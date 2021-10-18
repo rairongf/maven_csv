@@ -1,9 +1,12 @@
 package br.inatel.cdg.utils;
 
 import br.inatel.cdg.models.Game;
+import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URISyntaxException;
@@ -34,5 +37,26 @@ public class CsvUtils {
         return gameList;
     }
 
+    static public void writeGamesToCsv(String filePath, List<Game> games)
+    {
+        File file = new File(filePath);
 
+        try {
+            FileWriter outputfile = new FileWriter(file);
+
+            CSVWriter writer = new CSVWriter(outputfile);
+            List<String[]> data = new ArrayList<String[]>();
+            data.add(new String[] {"rank", "name", "platform", "year", "genre", "publisher",
+            "na_sales", "eu_sales", "jp_sales", "other_sales", "global_sales"});
+            for (Game game: games) {
+                data.add(game.toStringList());
+            }
+            writer.writeAll(data);
+
+            writer.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
